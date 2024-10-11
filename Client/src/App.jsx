@@ -1,13 +1,19 @@
-import "./App.css";
-import {TeamsPage} from "./Pages/Teams/TeamsPage.jsx";
+import { ThemeProvider } from '@mui/material/styles';
+import { theme }from './Themes/Button.js'
+import HomePage from "./Pages/HomePage.jsx";
+import {TeamsPage} from "./Pages/TeamsPage.jsx";
 
-function App() {
-  return (
-    <>
-      <p>Hello From React App</p>
+
+const App = () => (
+    <ThemeProvider theme={theme}>
         {/*<TeamsPage />*/}
-    </>
-  );
-}
+        <HomePage />
+    </ThemeProvider>
+);
+
 
 export default App;
+
+
+
+
