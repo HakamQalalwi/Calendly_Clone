@@ -8,21 +8,20 @@
 
 .logoWrapper {
     display: flex;
-    animation: slide 30s linear infinite;
-    position: absolute;
+    animation: slide 35s linear infinite;
     white-space: nowrap;
 }
 
-
 @keyframes slide {
     0% {
-        transform: translateX(100%);
+        transform: translateX(0%);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
 }
 
 .logo {
-    margin: 0 80px;
+    margin: 0 40px;
 }
+

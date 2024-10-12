@@ -11,7 +11,7 @@ import {
 import team_standardization from '../assets/team_standardization.webp';
 import Team_1 from '../assets/Team_1.webp';
 import Team_2 from '../assets/Team_2.jpg';
-import Team_3 from '../assets/Team_3.jpg';
+import Team_3 from '../assets/Team_3.webp';
 import smartSchedule from '../assets/smartSchedule.png';
 import plans from '../assets/plans.png';
 
@@ -66,6 +66,15 @@ export const TeamsPage = () => {
             </Grid>
           </Grid>
 
+          <LogoMotion />
+
+          <Box textAlign="center">
+            <Typography variant="h2" color="#1d344b" sx={{ fontWeight: '700' }}>
+              The leader in collaborative scheduling
+            </Typography>
+          </Box>
+
+
           {/* Section 2: Speed of Connection */}
           <Grid container spacing={2} sx={{ minHeight: '40vh', width: '80%', marginLeft: '60px', marginBottom: '40px' }}>
             <Grid item xs={12} md={6} display="flex" alignItems="center" justifyContent="center">
@@ -84,15 +93,14 @@ export const TeamsPage = () => {
               </Stack>
             </Grid>
 
-            <LogoMotion />
-
             <Grid item xs={12} md={6}>
               <Box component="img" alt="Team 2" src={Team_2} sx={{ height: '500px', objectFit: 'cover' }} />
             </Grid>
           </Grid>
 
+
           {/* Section 3: Time Management */}
-          <Grid container spacing={2} sx={{ minHeight: '40vh', width: '80%', marginLeft: '60px', marginBottom: '40px' }}>
+          <Grid container spacing={2} sx={{ minHeight: '40vh', width: '80%', marginLeft: '120px', marginBottom: '40px' }}>
             <Grid item xs={12} md={6}>
               <Box component="img" alt="Team 3" src={Team_3} sx={{ height: '400px', objectFit: 'cover' }} />
             </Grid>
