@@ -2,34 +2,33 @@ import { Box, Button, Typography, Grid } from "@mui/material";
 import NavBar from "../component/NavBar.jsx";
 import individual_1 from "../assets/Individual-1.jpeg";
 import individual_2 from "../assets/Individual-2.jpeg";
-import solution_1 from "../assets/solution_1.jpeg";
-import solution_2 from "../assets/solution_2.jpeg";
-import solution_3 from "../assets/solution_3.jpeg";
-import solution_4 from "../assets/solution_4.jpeg";
-import video from "../assets/videomet1.mp4";
+import individual_3 from "../assets/individual_3.jpeg";
+import individual_4 from "../assets/individual_4.jpeg";
+import individual_5 from "../assets/individual_5.jpeg";
+import individual_6 from "../assets/individual_6.jpeg";
 
 function IndividualsPage() {
     const solutionBox = [
         {
-            imageUrl: solution_1,
+            imageUrl: individual_3,
             imageAlt: "Sales",
             title: "Sales",
             description: "Get to your best leads faster",
         },
         {
-            imageUrl: solution_2,
+            imageUrl: individual_4,
             imageAlt: "Recruiting",
             title: "Recruiting",
             description: "Less emailing, more interviews",
         },
         {
-            imageUrl: solution_3,
+            imageUrl: individual_5,
             imageAlt: "Customer Success",
             title: "Customer Success",
             description: "Connect with customers when it matters",
         },
         {
-            imageUrl: solution_4,
+            imageUrl: individual_6,
             imageAlt: "Education",
             title: "Education",
             description: "Boost student success",
@@ -107,25 +106,6 @@ function IndividualsPage() {
                     </Box>
                 </Box>
             </Box>
-
-
-            {/* Video Section */}
-            {/*<Box width="100%" margin="auto" marginTop="6%">*/}
-            {/*    <Box width="80%" margin="auto" display="flex" flexDirection="column" alignItems="center" marginBottom="7%">*/}
-            {/*        <Typography variant="h6" color="primary" gutterBottom>*/}
-            {/*            HOW IT WORKS*/}
-            {/*        </Typography>*/}
-            {/*        <Typography variant="h3" fontWeight="bold" align="center" gutterBottom>*/}
-            {/*            See Calendly in action*/}
-            {/*        </Typography>*/}
-            {/*        <Typography variant="body1" color="text.secondary" align="center" sx={{ lineHeight: 1.5, marginBottom: 4 }}>*/}
-            {/*            With scheduling hassles and interruptions gone, your day is cleared for accomplishment.*/}
-            {/*        </Typography>*/}
-            {/*        <Box component="video" controls src={video} width="100%" margin="auto" borderRadius={3} />*/}
-            {/*    </Box>*/}
-            {/*</Box>*/}
-
-
                 {/* Footer Section */}
             <Box width='80%' margin="auto" textAlign="center" marginBottom="9%" color='#0b3558'>
                 <Typography variant="h5" color="#1d344b">The right Calendly for the work you do</Typography>
