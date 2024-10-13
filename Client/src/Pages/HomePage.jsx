@@ -9,7 +9,7 @@ import LogoMotion from "../component/LogoMotion.jsx";
 function HomePage(){
     return (
         <>
-            <Box><NavBar /></Box>
+            <Box><NavBar/></Box>
             <Box width="100%" margin="auto" marginTop="6%">
                 <Box width="80%" display="flex" justifyContent="space-between" margin='auto' marginBottom="7%" >
                     <Box width="35%">
