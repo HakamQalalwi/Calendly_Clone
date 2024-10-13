@@ -16,6 +16,7 @@ import smartSchedule from '../assets/smartSchedule.png';
 import plans from '../assets/plans.png';
 
 import LogoMotion from "../component/LogoMotion.jsx";
+import Footer from "../component/Footer.jsx";
 
 
 export const TeamsPage = () => {
@@ -163,9 +164,10 @@ export const TeamsPage = () => {
           </Box>
 
           {/* Image sections at the bottom */}
-          <Box component="img" src={plans} sx={{ width: '90%', margin: 'auto', marginBottom: '40px' }} />
+          <Box component="img" src={plans} sx={{ width: '90%', margin: 'auto', marginBottom: '0px' }} />
           <Box component="img" src={smartSchedule} sx={{ width: '100%' }} />
         </Box>
+        <Footer />
       </>
   );
 };

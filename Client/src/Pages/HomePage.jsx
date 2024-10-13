@@ -5,6 +5,7 @@ import {Box, Button, Input, Link, Typography} from "@mui/material";
 
 import NavBar from "../component/NavBar.jsx";
 import LogoMotion from "../component/LogoMotion.jsx";
+import Footer from "../component/Footer.jsx";
 
 function HomePage(){
     return (
@@ -150,6 +151,7 @@ function HomePage(){
                     </Link>
                 </Box>
             </Box>
+            <Footer />
         </>
     );
 }

@@ -6,6 +6,7 @@ import individual_3 from "../assets/individual_3.jpeg";
 import individual_4 from "../assets/individual_4.jpeg";
 import individual_5 from "../assets/individual_5.jpeg";
 import individual_6 from "../assets/individual_6.jpeg";
+import Footer from "../component/Footer.jsx";
 
 function IndividualsPage() {
     const solutionBox = [
@@ -38,12 +39,15 @@ function IndividualsPage() {
     return (
         <>
             <Box><NavBar/></Box>
-            <Box width="100%" margin="auto" marginTop="6%">
+            <Box width="100%" margin="auto" marginTop="10%">
                 <Box width="80%" display="flex" justifyContent="space-between" margin='auto' marginBottom="7%" >
                     {/* Left Section */}
-                    <Box width="35%">
-                        <Typography variant="h2" component="h2" fontWeight="bold" sx={{ lineHeight: 1.2 }}>
-                            <span style={{ color: "#0b3558" }}>The genius way to work <Typography component="span" color="primary" fontWeight="bolder">better</Typography></span>
+                    <Box width="40%" marginTop="10%">
+                        <Typography variant="h3" component="h3" fontWeight="bold" color="#0b3558">
+                            The genius way to work
+                        </Typography>
+                        <Typography variant="h3" component="h3" fontWeight="bold" color="#0b3558">
+                            <span style={{ color: "#006bff" }}>better</span>
                         </Typography>
                         <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.5, marginTop: 4 }}>
                             Calendly makes it easy to work smarter when you’re working solo. Meetings, sessions, and appointments become more efficient ways to achieve success and accomplish goals.
@@ -56,7 +60,7 @@ function IndividualsPage() {
                     </Box>
 
                     {/* Right Section with Image */}
-                    <Box width="45%">
+                    <Box width="50%">
                         <img width="100%" src={individual_1} alt="image_1" style={{ borderRadius: "8px" }} />
                     </Box>
                 </Box>
@@ -119,6 +123,7 @@ function IndividualsPage() {
                     ))}
                 </Box>
             </Box>
+            <Footer />
         </>
 
     );

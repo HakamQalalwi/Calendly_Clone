@@ -8,10 +8,10 @@ import {LogInPage} from "./Pages/LogInPage.jsx";
 
 const App = () => (
     <ThemeProvider theme={theme}>
-        {/*<TeamsPage />*/}
+        <TeamsPage />
         {/*<IndividualsPage/>*/}
         {/*<HomePage />*/}
-        <LogInPage/>
+        {/*<LogInPage/>*/}
     </ThemeProvider>
 );
 
