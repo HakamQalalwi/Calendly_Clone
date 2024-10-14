@@ -6,14 +6,7 @@ export function LogInPage() {
     return (
         <>
             <Box><NavBar /></Box>
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    minHeight: '100vh', // Ensures the Box takes the full viewport height
-                }}
-            >
+            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh',}}>
                 <Container maxWidth="lg" sx={{ textAlign: 'left', marginTop: "8%", marginBottom: "7%" }}>
                     <Grid container spacing={4}>
                         <Grid item xs={12} md={6}>

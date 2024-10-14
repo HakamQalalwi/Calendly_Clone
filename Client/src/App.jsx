@@ -4,14 +4,16 @@ import HomePage from "./Pages/HomePage.jsx";
 import {TeamsPage} from "./Pages/TeamsPage.jsx";
 import IndividualsPage from "./Pages/IndividualsPage.jsx";
 import {LogInPage} from "./Pages/LogInPage.jsx";
+import SignUpPage from "./Pages/SignUpPage.jsx";
 
 
 const App = () => (
     <ThemeProvider theme={theme}>
-        <TeamsPage />
+        {/*<TeamsPage />*/}
         {/*<IndividualsPage/>*/}
         {/*<HomePage />*/}
         {/*<LogInPage/>*/}
+        <SignUpPage/>
     </ThemeProvider>
 );
 
