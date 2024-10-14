@@ -13,7 +13,7 @@ const App = () => (
         {/*<IndividualsPage/>*/}
         {/*<HomePage />*/}
         {/*<LogInPage/>*/}
-        <SignUpPage/>
+        {/*<SignUpPage/>*/}
     </ThemeProvider>
 );
 
