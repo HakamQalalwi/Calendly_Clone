@@ -1,5 +1,17 @@
 import { useState } from "react";
-import {Box, Button, Typography, MenuItem, TextField, Select, FormControl, Stack, Grid, Link,} from "@mui/material";
+import {
+    Box,
+    Button,
+    Typography,
+    MenuItem,
+    TextField,
+    Select,
+    FormControl,
+    Stack,
+    Grid,
+    Link,
+    Paper,
+} from "@mui/material";
 
 function AddOneonOneEventPage() {
     const [eventData, setEventData] = useState({
@@ -11,6 +23,7 @@ function AddOneonOneEventPage() {
         endDate: "",
         duration: "",
     });
+
     const handleChange = (e) => {
         setEventData({
             ...eventData,
@@ -26,6 +39,7 @@ function AddOneonOneEventPage() {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
+            sx={{ backgroundColor: "#f0f4f8" }} // Light background for better contrast
         >
             {/* Header */}
             <Box width="90%" padding="1%" marginBottom="2%">
@@ -36,12 +50,12 @@ function AddOneonOneEventPage() {
                                 variant="contained"
                                 color="primary"
                                 sx={{
-                                    width: '120px',
+                                    width: "120px",
                                     borderRadius: 2,
-                                    padding: '8px 16px',
-                                    fontSize: '0.875rem',
-                                    textTransform: 'none',
-                                    boxShadow: 2,
+                                    padding: "8px 16px",
+                                    fontSize: "0.875rem",
+                                    textTransform: "none",
+                                    boxShadow: 3,
                                     '&:hover': {
                                         backgroundColor: '#0a2c4e',
                                     },
@@ -61,28 +75,23 @@ function AddOneonOneEventPage() {
 
             <Grid container width="90%" height="80vh" spacing={2}>
                 <Grid item xs={4} display="flex" flexDirection="column" height="100%">
-                    <Box
-                        border="2px solid"
-                        borderRadius={2}
-                        p={2}
-                        overflow="auto"
-                        height="100%"
-                    >
+                    <Paper elevation={3} sx={{ padding: 3, borderRadius: 2 }}>
                         <form>
                             <Stack spacing={2}>
                                 <Box>
-                                    <Typography>Event Name*</Typography>
+                                    <Typography variant="subtitle1" fontWeight="bold">Event Name*</Typography>
                                     <TextField
                                         name="name"
                                         fullWidth
                                         required
                                         onChange={handleChange}
                                         size="small"
+                                        variant="outlined"
                                     />
                                 </Box>
 
                                 <Box>
-                                    <Typography>Location</Typography>
+                                    <Typography variant="subtitle1" fontWeight="bold">Location</Typography>
                                     <FormControl fullWidth>
                                         <Select
                                             name="location"
@@ -90,6 +99,7 @@ function AddOneonOneEventPage() {
                                             onChange={handleChange}
                                             required
                                             size="small"
+                                            variant="outlined"
                                         >
                                             <MenuItem value="Microsoft Teams">Microsoft Teams</MenuItem>
                                             <MenuItem value="In-person meeting">In-person meeting</MenuItem>
@@ -103,7 +113,7 @@ function AddOneonOneEventPage() {
                                 </Box>
 
                                 <Box>
-                                    <Typography>Description/Instructions</Typography>
+                                    <Typography variant="subtitle1" fontWeight="bold">Description/Instructions</Typography>
                                     <TextField
                                         name="description"
                                         placeholder="Write a summary and any details your invitee should know about the event"
@@ -113,11 +123,12 @@ function AddOneonOneEventPage() {
                                         required
                                         onChange={handleChange}
                                         size="small"
+                                        variant="outlined"
                                     />
                                 </Box>
 
                                 <Box>
-                                    <Typography>Event Link*</Typography>
+                                    <Typography variant="subtitle1" fontWeight="bold">Event Link*</Typography>
                                     <Box display="flex" alignItems="center">
                                         <Typography>calendly.com/</Typography>
                                         <TextField
@@ -126,12 +137,13 @@ function AddOneonOneEventPage() {
                                             required
                                             onChange={handleChange}
                                             size="small"
+                                            variant="outlined"
                                         />
                                     </Box>
                                 </Box>
 
                                 <Box>
-                                    <Typography fontWeight="bold">Date Range</Typography>
+                                    <Typography variant="subtitle1" fontWeight="bold">Date Range</Typography>
                                     <Grid container gap={1}>
                                         <TextField
                                             label="Start Date"
@@ -140,6 +152,7 @@ function AddOneonOneEventPage() {
                                             required
                                             onChange={handleChange}
                                             size="small"
+                                            variant="outlined"
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}
@@ -151,6 +164,7 @@ function AddOneonOneEventPage() {
                                             required
                                             onChange={handleChange}
                                             size="small"
+                                            variant="outlined"
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}
@@ -159,7 +173,7 @@ function AddOneonOneEventPage() {
                                 </Box>
 
                                 <Box>
-                                    <Typography fontWeight="bold">Duration</Typography>
+                                    <Typography variant="subtitle1" fontWeight="bold">Duration</Typography>
                                     <FormControl fullWidth>
                                         <Select
                                             name="duration"
@@ -167,6 +181,7 @@ function AddOneonOneEventPage() {
                                             onChange={handleChange}
                                             required
                                             size="small"
+                                            variant="outlined"
                                         >
                                             <MenuItem value="15min">15 min</MenuItem>
                                             <MenuItem value="30min">30 min</MenuItem>
@@ -182,38 +197,46 @@ function AddOneonOneEventPage() {
                                         variant="text"
                                         sx={{
                                             borderRadius: 1,
-                                            fontSize: '0.875rem',
-                                            width: '100px',
-                                            height: '40px',
-                                            fontStyle: 'normal',
-                                            marginTop: '4px'
+                                            fontSize: "0.875rem",
+                                            width: "100px",
+                                            height: "40px",
+                                            fontStyle: "normal",
+                                            marginTop: "4px",
                                         }}
                                     >
                                         Cancel
                                     </Button>
 
-                                    <Button href="/" variant="contained" color="primary" sx={{ borderRadius: 1,fontSize: '0.875rem', width: '140px', height: '40px' ,marginTop: '4px'}}>
+                                    <Button
+                                        href="/"
+                                        variant="contained"
+                                        color="primary"
+                                        sx={{
+                                            borderRadius: 1,
+                                            fontSize: "0.875rem",
+                                            width: "140px",
+                                            height: "40px",
+                                            marginTop: "4px",
+                                        }}
+                                    >
                                         Next
                                     </Button>
                                 </Stack>
                             </Stack>
                         </form>
-                    </Box>
+                    </Paper>
                 </Grid>
-                <Grid
-                    item
-                    xs={8}
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <Box
-                        border="2px solid"
-                        borderRadius={2}
-                        p={3}
-                        width="100%"
-                        height="100%"
-                        overflow="auto"
+                <Grid item xs={8} display="flex" justifyContent="center" alignItems="center">
+                    <Paper
+                        elevation={3}
+                        sx={{
+                            padding: 3,
+                            borderRadius: 2,
+                            width: "100%",
+                            height: "100%",
+                            overflow: "auto",
+                            backgroundColor: "#ffffff",
+                        }}
                     >
                         <Typography
                             variant="body2"
@@ -222,14 +245,12 @@ function AddOneonOneEventPage() {
                                 borderBottom: "1px solid #e0e0e0",
                                 paddingBottom: "8px",
                                 marginBottom: "16px",
-                                backgroundColor: "gray",
                                 textAlign: "center",
                                 fontWeight: "bold",
                             }}
                         >
                             This is a preview. To book an event.
                         </Typography>
-
 
                         <Typography variant="h5" fontWeight="bold">
                             {eventData.name || "Event name here"}
@@ -256,9 +277,8 @@ function AddOneonOneEventPage() {
                         >
                             {eventData.description || "Event description here"}
                         </Typography>
-                    </Box>
+                    </Paper>
                 </Grid>
-
             </Grid>
         </Box>
     );
