@@ -2,7 +2,7 @@ import { Box, Button, Input, Typography } from "@mui/material";
 import capture_1 from '../../assets/capture_1.png';
 
 const HeroSection = () => (
-    <Box width="100%" margin="auto" mt={8}>
+    <Box width="100%" margin="auto" mt={8} marginTop="120px">
         <Box width="80%" display="flex" justifyContent="space-between" margin="auto" mb={8}>
             {/* Left Section */}
             <Box width="35%">
