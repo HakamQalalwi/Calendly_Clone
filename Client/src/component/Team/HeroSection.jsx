@@ -1,5 +1,6 @@
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import Team_1 from '../../assets/Team_1.webp';
+import {Link} from "react-router-dom";
 
 const HeroSection = () => {
     return (
@@ -13,16 +14,10 @@ const HeroSection = () => {
                         scheduling automation enables your team to hit goals faster.
                     </Typography>
                     <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ alignItems: 'center' }}>
-                        <Button variant="contained" color="primary" sx={{ borderRadius: "8px", fontSize: '0.875rem', width: '170px', height: '60px' }}>
+                        <Button component={Link} to="/signup" variant="contained" color="primary" sx={{ borderRadius: "8px", fontSize: '0.875rem', width: '170px', height: '60px' }}>
                             Start for free
                         </Button>
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            sx={{ borderRadius: "8px", width: '170px', height: '60px', fontSize: '0.875rem', padding: '8px 16px' }}
-                        >
-                            Get A DEMO
-                        </Button>
+
                     </Stack>
                 </Stack>
             </Grid>

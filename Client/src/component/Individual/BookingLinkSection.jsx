@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import individual_2 from "../../assets/Individual-2.jpeg";
+import {Link as RouterLink} from "react-router-dom";
 
 const BookingLinkSection = () => (
     <Box display="flex" justifyContent="space-between" width="80%" margin="auto" marginBottom="7%">
@@ -17,7 +18,10 @@ const BookingLinkSection = () => (
                 Time is a precious commodity. Calendly is the courteous way to book meetings and other appointments, because scheduling with just a few clicks makes the most of everyone’s time.
             </Typography>
             <Box mt={4}>
-                <Button variant="contained" color="primary" size="large">
+                <Button component={RouterLink}
+                        to="/signup"
+                        variant="contained"
+                        color="primary">
                     Get Your Link
                 </Button>
             </Box>
