@@ -1,48 +1,84 @@
-import {Box, Container, Grid, Typography, TextField, Button, Link} from "@mui/material";
-import NavBar from "../component/NavBar.jsx";
-import Footer from "../component/Footer.jsx";
-import {Link as RouterLink, useLocation} from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Box, Container, Grid, Typography, TextField, Button } from '@mui/material';
+import NavBar from '../component/NavBar.jsx';
+import Footer from '../component/Footer.jsx';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 
-function SignUp() {
+function SignUpPage() {
+    const navigate = useNavigate();
+    const { signUp } = useUser(); // Use signUp from context
     const location = useLocation();
-    const [email, setEmail] = useState(location.state?.email || '');
+
+    const [formData, setFormData] = useState({
+        displayName: '',
+        email: '',
+        password: '',
+    });
+
+    useEffect(() => {
+        // Set the email from the location state if it exists
+        if (location.state?.email) {
+            setFormData((prev) => ({
+                ...prev,
+                email: location.state.email
+            }));
+        }
+    }, [location.state]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        signUp(formData);
+        navigate('/create-event');
+    };
 
     return (
         <>
             <Box><NavBar /></Box>
-            <Container maxWidth="lg" sx={{ marginTop: "200px", marginBottom: "7%" }}>
+            <Container maxWidth="lg" sx={{ marginTop: '200px', marginBottom: '7%' }}>
                 <Grid container spacing={4}>
                     <Grid item xs={12} md={6}>
-                        <Box>
-                            <Typography variant="h4" fontWeight="bold" gutterBottom>
+                        <Typography variant="h4" fontWeight="bold" gutterBottom>
+                            Sign Up
+                        </Typography>
+                        <form onSubmit={handleSubmit}>
+                            <TextField
+                                fullWidth
+                                label="User Name"
+                                name="displayName"
+                                value={formData.displayName}
+                                onChange={handleChange}
+                                required
+                                sx={{ marginBottom: 2 }}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Email Address"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                sx={{ marginBottom: 2 }}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Password"
+                                type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                                sx={{ marginBottom: 2 }}
+                            />
+                            <Button type="submit" variant="contained" color="primary" sx={{ width: '100%' }}>
                                 Sign Up
-                            </Typography>
-                            <form>
-                                <TextField fullWidth label="User Name" variant="outlined" name="displayName" required sx={{ marginBottom: 2 }} />
-                                <TextField
-                                    fullWidth
-                                    label="Email Address"
-                                    variant="outlined"
-                                    name="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    sx={{ marginBottom: 2 }}
-                                />
-                                <TextField fullWidth label="Password" type="password" variant="outlined" name="password" required sx={{ marginBottom: 2 }} />
-                                <TextField fullWidth label="Confirm Password" type="password" variant="outlined" name="confirmPassword" required sx={{ marginBottom: 2 }} />
-                                <Button type="submit" variant="contained" color="primary" sx={{ width: "100%" }}>
-                                    Sign Up
-                                </Button>
-                                <Typography variant="body2" sx={{ marginTop: 2 }}>
-                                    Do you have an account?{" "}
-                                    <Link component={RouterLink}  to="/login" style={{ color: "#486bff" }}>
-                                        Log In
-                                    </Link>
-                                </Typography>
-                            </form>
-                        </Box>
+                            </Button>
+                        </form>
                     </Grid>
                 </Grid>
             </Container>
@@ -51,4 +87,4 @@ function SignUp() {
     );
 }
 
-export default SignUp;
+export default SignUpPage;
