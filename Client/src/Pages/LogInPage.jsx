@@ -7,7 +7,7 @@ import { Link as RouterLink } from "react-router-dom";
 export function LogInPage() {
     const [showPasswordInput, setShowPasswordInput] = useState(false);
 
-    // Function to handle the "Log In" button click
+
     const handleLoginClick = () => {
         setShowPasswordInput(true);
     };
