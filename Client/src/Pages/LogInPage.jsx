@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Typography, TextField, Button, Grid, Container, Box } from '@mui/material';
 import NavBar from '../component/NavBar.jsx';
 import Footer from '../component/Footer.jsx';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
 export function LogInPage() {
@@ -57,6 +57,12 @@ export function LogInPage() {
                                 Log In
                             </Button>
                         </form>
+                        <Typography variant="body2" sx={{ marginTop: 2 }}>
+                            Don’t have an account?{" "}
+                            <Link to="/signup" style={{ color: "#486bff" }}>
+                                Sign Up
+                            </Link>
+                        </Typography>
                     </Grid>
                 </Grid>
             </Container>
