@@ -1,7 +1,7 @@
-import { Box, Button, Grid, Typography, Paper } from '@mui/material';
-import { styled } from '@mui/system';
+import { Box, Grid, Typography, Paper, styled } from '@mui/material';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import LogOutButton from "../component/LogOutButton.jsx";
 
 const EventTypeIcon = styled('img')({
     width: '50px',
@@ -37,13 +37,6 @@ const DescriptionTypography = styled(Typography)(() => ({
     marginBottom: '4px',
 }));
 
-const LogoutButton = styled(Button)(({ theme }) => ({
-    position: 'absolute',
-    top: theme.spacing(3),
-    right: theme.spacing(3),
-    borderRadius: "20px"
-}));
-
 export function CreateEventPage() {
     const eventTypes = [
         {
@@ -76,14 +69,8 @@ export function CreateEventPage() {
         },
     ];
 
-    const { user, logout } = useUser();
+    const { user } = useUser();
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    };
-
     const handleEventClick = (route) => {
         navigate(route);
     };
@@ -91,26 +78,11 @@ export function CreateEventPage() {
     return (
         <Box textAlign="center" marginTop="20px" position="relative">
             <Typography variant="h4" fontWeight="bold" marginBottom={3}>
-                Welcome, <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>👋 Create your
-                event.
+                Welcome, <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>👋 Choose your
+                event type to procced.
             </Typography>
-            <LogoutButton
-                variant="contained"
-                color="secondary"
-                onClick={handleLogout}
-            >
-                Log Out
-            </LogoutButton>
+            <LogOutButton/>
             <Box width="100%" height="100vh" display="flex" flexDirection="column" alignItems="center" padding="20px">
-                <Box width="90%" padding="1%" marginBottom="2%">
-                    <Grid container justifyContent="space-between" alignItems="center">
-                        <Grid item>
-                            <Typography variant="h6" fontWeight="bold">
-                                Create New Event Type
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </Box>
                 <Grid container width="90%" spacing={2} sx={{ justifyContent: "center" }}>
                     {eventTypes.map((eventType, index) => (
                         <Grid item xs={12} sm={6} md={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>

@@ -34,7 +34,7 @@ function SignUpPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         signUp(formData);
-        navigate('/create-event');
+        navigate('/userdashboard');
     };
 
     return (
