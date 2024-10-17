@@ -16,7 +16,7 @@ export function LogInPage() {
         logIn({ email, password });
 
         if (user) {
-            navigate('/create-event');
+            navigate('/userdashboard');
         }
     };
 

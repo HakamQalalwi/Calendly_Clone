@@ -1,7 +1,5 @@
-import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, styled } from "@mui/material";
 import { Link } from "react-router-dom";
-import { styled } from "@mui/system";
 import ScarecrowImage from "../assets/Scarecrow.png";
 
 // Styled components using styled API
