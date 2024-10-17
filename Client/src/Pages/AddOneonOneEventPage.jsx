@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
     Box,
     Button,
@@ -12,26 +11,24 @@ import {
     Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import {useData} from "../context/EventContext.jsx";
 
 function AddOneonOneEventPage() {
     const navigate = useNavigate();
-    const [eventData, setEventData] = useState({
-        name: "",
-        location: "",
-        description: "",
-        link: "",
-        startDate: "",
-        endDate: "",
-        duration: "",
-    });
+    const {eventData, setEventData, createEvent} = useData();
 
     const handleChange = (e) => {
-        setEventData({
-            ...eventData,
+        setEventData((prevData) => ({
+            ...prevData,
             [e.target.name]: e.target.value,
-        });
+        }));
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createEvent(eventData);
+        navigate("/userdashboard", { state: eventData });
+    };
     return (
         <Box
             width="100vw"
@@ -40,9 +37,8 @@ function AddOneonOneEventPage() {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            sx={{ backgroundColor: "#f0f4f8" }} // Light background for better contrast
+            sx={{ backgroundColor: "#f0f4f8" }}
         >
-            {/* Header */}
             <Box width="90%" padding="1%" marginBottom="2%">
                 <Grid container justifyContent="space-between" alignItems="center">
                     <Grid item>
@@ -60,7 +56,7 @@ function AddOneonOneEventPage() {
                                     backgroundColor: '#0a2c4e',
                                 },
                             }}
-                            onClick={() => navigate("/create-event")}
+                            onClick={() => navigate("/userdashboard")}
                         >
                             Dashboard
                         </Button>
@@ -76,7 +72,7 @@ function AddOneonOneEventPage() {
             <Grid container width="90%" height="80vh" spacing={2}>
                 <Grid item xs={4} display="flex" flexDirection="column" height="100%">
                     <Paper elevation={3} sx={{ padding: 3, borderRadius: 2 }}>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <Stack spacing={2}>
                                 <Box>
                                     <Typography variant="subtitle1" fontWeight="bold">Event Name*</Typography>
@@ -85,6 +81,16 @@ function AddOneonOneEventPage() {
                                         fullWidth
                                         required
                                         onChange={handleChange}
+                                        size="small"
+                                        variant="outlined"
+                                    />
+                                </Box>
+                                <Box>
+                                    <Typography variant="subtitle1" fontWeight="bold">Event Type*</Typography>
+                                    <TextField
+                                        name="type"
+                                        value="One on One"
+                                        fullWidth
                                         size="small"
                                         variant="outlined"
                                     />
@@ -157,18 +163,18 @@ function AddOneonOneEventPage() {
                                                 shrink: true,
                                             }}
                                         />
-                                        <TextField
-                                            label="End Date"
-                                            type="date"
-                                            name="endDate"
-                                            required
-                                            onChange={handleChange}
-                                            size="small"
-                                            variant="outlined"
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                        />
+                                        {/*<TextField*/}
+                                        {/*    label="End Date"*/}
+                                        {/*    type="date"*/}
+                                        {/*    name="endDate"*/}
+                                        {/*    required*/}
+                                        {/*    onChange={handleChange}*/}
+                                        {/*    size="small"*/}
+                                        {/*    variant="outlined"*/}
+                                        {/*    InputLabelProps={{*/}
+                                        {/*        shrink: true,*/}
+                                        {/*    }}*/}
+                                        {/*/>*/}
                                     </Grid>
                                 </Box>
 
@@ -193,7 +199,7 @@ function AddOneonOneEventPage() {
                                 </Box>
                                 <Stack direction="row" spacing={1}>
                                     <Button
-                                        href="/"
+                                        onClick={()=>navigate("/userdashboard")}
                                         variant="text"
                                         sx={{
                                             borderRadius: 1,
@@ -208,7 +214,7 @@ function AddOneonOneEventPage() {
                                     </Button>
 
                                     <Button
-                                        href="/"
+                                        type = "submit"
                                         variant="contained"
                                         color="primary"
                                         sx={{
@@ -277,6 +283,21 @@ function AddOneonOneEventPage() {
                         >
                             {eventData.description || "Event description here"}
                         </Typography>
+                        {eventData.link ? (
+                            <Typography variant="h5" fontWeight="bold">
+                                <a
+                                    href={`https://calendly.com/${eventData.link}`}
+                                    target="_blank"
+                                    style={{ textDecoration: 'none', color: '#006bff' }}
+                                >
+                                    {`https://calendly.com/${eventData.link}`}
+                                </a>
+                            </Typography>
+                        ) : (
+                            <Typography variant="h5" fontWeight="bold">
+                                Add a link for your event to show here
+                            </Typography>
+                        )}
                     </Paper>
                 </Grid>
             </Grid>
