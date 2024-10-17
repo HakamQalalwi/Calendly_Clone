@@ -9,11 +9,12 @@ import {
     FormControl,
     Stack,
     Grid,
-    Link,
     Paper,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function AddOneonOneEventPage() {
+    const navigate = useNavigate();
     const [eventData, setEventData] = useState({
         name: "",
         location: "",
@@ -45,25 +46,24 @@ function AddOneonOneEventPage() {
             <Box width="90%" padding="1%" marginBottom="2%">
                 <Grid container justifyContent="space-between" alignItems="center">
                     <Grid item>
-                        <Link to="/create_event">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                sx={{
-                                    width: "120px",
-                                    borderRadius: 2,
-                                    padding: "8px 16px",
-                                    fontSize: "0.875rem",
-                                    textTransform: "none",
-                                    boxShadow: 3,
-                                    '&:hover': {
-                                        backgroundColor: '#0a2c4e',
-                                    },
-                                }}
-                            >
-                                Dashboard
-                            </Button>
-                        </Link>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{
+                                width: "120px",
+                                borderRadius: 2,
+                                padding: "8px 16px",
+                                fontSize: "0.875rem",
+                                textTransform: "none",
+                                boxShadow: 3,
+                                '&:hover': {
+                                    backgroundColor: '#0a2c4e',
+                                },
+                            }}
+                            onClick={() => navigate("/create-event")}
+                        >
+                            Dashboard
+                        </Button>
                     </Grid>
                     <Grid item>
                         <Typography variant="h6" fontWeight="bold">
