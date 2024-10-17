@@ -1,5 +1,6 @@
-import { Box, Button, Typography } from "@mui/material";
+import {Box, Button, Link, Typography} from "@mui/material";
 import individual_1 from "../../assets/Individual-1.jpeg";
+import {Link as RouterLink} from "react-router-dom";
 
 const HeroSection = () => (
     <Box display="flex" justifyContent="space-between" width="80%" margin="auto" marginTop="10%" marginBottom="7%">
@@ -12,8 +13,8 @@ const HeroSection = () => (
                 Calendly makes it easy to work smarter when you’re working solo. Meetings, sessions, and appointments become more efficient ways to achieve success and accomplish goals.
             </Typography>
             <Box mt={4}>
-                <Button variant="contained" color="primary" sx={{ padding: '10px 20px', fontSize: '1rem', textTransform: 'none', width: '180px', height: '50px' }}>
-                    Sign up for free
+                <Button variant="contained" color="primary" component={RouterLink} to="/signup" sx={{ padding: '10px 20px', fontSize: '1rem', textTransform: 'none', width: '180px', height: '50px' }}>
+                        Sign Up for free
                 </Button>
             </Box>
         </Box>

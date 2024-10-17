@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from "@mui/material";
+import {Box, Button, Link, Typography} from "@mui/material";
+import {Link as RouterLink} from "react-router-dom";
 
 const IntegrationSection = () => (
     <Box width="100%" margin="auto" marginTop="6%" textAlign="center">
@@ -10,11 +11,18 @@ const IntegrationSection = () => (
                 Smart scheduling will change the way you – and your tools – work.
             </Typography>
             <Box display="flex" justifyContent="center" gap={1}>
-                <Button variant="contained" color="primary" size="large">
+                <Button component={RouterLink}
+                        to="/"
+                        variant="contained"
+                        color="primary"
+                       >
                     View all
                 </Button>
-                <Button variant="contained" color="primary" size="large">
-                    Start for free
+                <Button component={RouterLink}
+                        to="/signup"
+                        variant="contained"
+                        color="primary">
+                        Start For Free
                 </Button>
             </Box>
         </Box>
