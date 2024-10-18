@@ -13,6 +13,8 @@ import NotFound from './Pages/NotFound.jsx';
 import PrivateRoute from './context/PrivateRoute.jsx';
 import UserDashboard from "./Pages/UserDashboard.jsx";
 import {EventContextProvider} from "./context/EventContext.jsx";
+import AddGroupEventPage from "./Pages/AddGroupEventPage.jsx";
+import AddCollectiveEventPage from "./Pages/AddCollectiveEventPage.jsx";
 
 const App = () => (
     <ThemeProvider theme={theme}>
@@ -28,6 +30,8 @@ const App = () => (
                         <Route path="/userdashboard" element={<PrivateRoute element={<UserDashboard />} />} />
                         <Route path="/create-event" element={<PrivateRoute element={<CreateEventPage />} />} />
                         <Route path="/add-one-on-one" element={<PrivateRoute element={<AddOneonOneEventPage />} />} />
+                        <Route path="/add-group-event" element={<PrivateRoute element={<AddGroupEventPage />} />} />
+                        <Route path="/add-collective-event" element={<PrivateRoute element={<AddCollectiveEventPage />}/>}/>
                         <Route path="/not-found" element={<NotFound />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>

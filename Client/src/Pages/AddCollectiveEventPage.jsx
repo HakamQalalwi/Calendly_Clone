@@ -11,11 +11,11 @@ import {
     Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import {useData} from "../context/EventContext.jsx";
+import { useData } from "../context/EventContext.jsx";
 
-function AddOneonOneEventPage() {
+function AddCollectiveEventPage() {
     const navigate = useNavigate();
-    const {eventData, setEventData, createEvent} = useData();
+    const { eventData, setEventData, createEvent } = useData();
 
     const handleChange = (e) => {
         setEventData((prevData) => ({
@@ -29,6 +29,7 @@ function AddOneonOneEventPage() {
         createEvent(eventData);
         navigate("/userdashboard", { state: eventData });
     };
+
     return (
         <Box
             width="100vw"
@@ -63,13 +64,13 @@ function AddOneonOneEventPage() {
                     </Grid>
                     <Grid item>
                         <Typography variant="h6" fontWeight="bold">
-                            Add One-on-One Event Type
+                            Add Collective Event Type
                         </Typography>
                     </Grid>
                 </Grid>
             </Box>
 
-            <Grid container width="80%" height="100%" spacing={2}>
+            <Grid container width="90%" height="80vh" spacing={2}>
                 <Grid item xs={4} display="flex" flexDirection="column" height="100%">
                     <Paper elevation={3} sx={{ padding: 3, borderRadius: 2 }}>
                         <form onSubmit={handleSubmit}>
@@ -89,10 +90,13 @@ function AddOneonOneEventPage() {
                                     <Typography variant="subtitle1" fontWeight="bold">Event Type*</Typography>
                                     <TextField
                                         name="type"
-                                        value="One on One"
+                                        value="Collective"
                                         fullWidth
                                         size="small"
                                         variant="outlined"
+                                        InputProps={{
+                                            readOnly: true,
+                                        }}
                                     />
                                 </Box>
 
@@ -116,6 +120,19 @@ function AddOneonOneEventPage() {
                                             <MenuItem value="GoTo Meeting">GoTo Meeting</MenuItem>
                                         </Select>
                                     </FormControl>
+                                </Box>
+
+                                <Box>
+                                    <Typography variant="subtitle1" fontWeight="bold">Hosts*</Typography>
+                                    <TextField
+                                        name="hosts"
+                                        placeholder="Add host names, separated by commas"
+                                        fullWidth
+                                        required
+                                        onChange={handleChange}
+                                        size="small"
+                                        variant="outlined"
+                                    />
                                 </Box>
 
                                 <Box>
@@ -163,18 +180,6 @@ function AddOneonOneEventPage() {
                                                 shrink: true,
                                             }}
                                         />
-                                        {/*<TextField*/}
-                                        {/*    label="End Date"*/}
-                                        {/*    type="date"*/}
-                                        {/*    name="endDate"*/}
-                                        {/*    required*/}
-                                        {/*    onChange={handleChange}*/}
-                                        {/*    size="small"*/}
-                                        {/*    variant="outlined"*/}
-                                        {/*    InputLabelProps={{*/}
-                                        {/*        shrink: true,*/}
-                                        {/*    }}*/}
-                                        {/*/>*/}
                                     </Grid>
                                 </Box>
 
@@ -199,7 +204,7 @@ function AddOneonOneEventPage() {
                                 </Box>
                                 <Stack direction="row" spacing={1}>
                                     <Button
-                                        onClick={()=>navigate("/userdashboard")}
+                                        onClick={() => navigate("/userdashboard")}
                                         variant="text"
                                         sx={{
                                             borderRadius: 1,
@@ -214,7 +219,7 @@ function AddOneonOneEventPage() {
                                     </Button>
 
                                     <Button
-                                        type = "submit"
+                                        type="submit"
                                         variant="contained"
                                         color="primary"
                                         sx={{
@@ -269,6 +274,9 @@ function AddOneonOneEventPage() {
                                 ? `Location: ${eventData.location}`
                                 : "Add a location for it to show here"}
                         </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                            {eventData.hosts ? `Hosts: ${eventData.hosts}` : "Add hosts for it to show here"}
+                        </Typography>
                         <Typography
                             variant="body2"
                             color="textSecondary"
@@ -295,7 +303,7 @@ function AddOneonOneEventPage() {
                             </Typography>
                         ) : (
                             <Typography variant="h5" fontWeight="bold">
-                                Add a link for your event to show here
+                                Your link will appear here
                             </Typography>
                         )}
                     </Paper>
@@ -305,4 +313,5 @@ function AddOneonOneEventPage() {
     );
 }
 
-export default AddOneonOneEventPage;
+export default AddCollectiveEventPage;
+

@@ -11,11 +11,11 @@ import {
     Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import {useData} from "../context/EventContext.jsx";
+import { useData } from "../context/EventContext.jsx";
 
-function AddOneonOneEventPage() {
+function AddGroupEventPage() {
     const navigate = useNavigate();
-    const {eventData, setEventData, createEvent} = useData();
+    const { eventData, setEventData, createEvent } = useData();
 
     const handleChange = (e) => {
         setEventData((prevData) => ({
@@ -29,6 +29,7 @@ function AddOneonOneEventPage() {
         createEvent(eventData);
         navigate("/userdashboard", { state: eventData });
     };
+
     return (
         <Box
             width="100vw"
@@ -63,13 +64,13 @@ function AddOneonOneEventPage() {
                     </Grid>
                     <Grid item>
                         <Typography variant="h6" fontWeight="bold">
-                            Add One-on-One Event Type
+                            Add Group Event Type
                         </Typography>
                     </Grid>
                 </Grid>
             </Box>
 
-            <Grid container width="80%" height="100%" spacing={2}>
+            <Grid container width="90%" height="80vh" spacing={2}>
                 <Grid item xs={4} display="flex" flexDirection="column" height="100%">
                     <Paper elevation={3} sx={{ padding: 3, borderRadius: 2 }}>
                         <form onSubmit={handleSubmit}>
@@ -89,7 +90,7 @@ function AddOneonOneEventPage() {
                                     <Typography variant="subtitle1" fontWeight="bold">Event Type*</Typography>
                                     <TextField
                                         name="type"
-                                        value="One on One"
+                                        value="Group"
                                         fullWidth
                                         size="small"
                                         variant="outlined"
@@ -110,9 +111,8 @@ function AddOneonOneEventPage() {
                                             <MenuItem value="Microsoft Teams">Microsoft Teams</MenuItem>
                                             <MenuItem value="In-person meeting">In-person meeting</MenuItem>
                                             <MenuItem value="Google Meet">Google Meet</MenuItem>
-                                            <MenuItem value="Phone call">Phone call</MenuItem>
-                                            <MenuItem value="Webex">Webex</MenuItem>
                                             <MenuItem value="Zoom">Zoom</MenuItem>
+                                            <MenuItem value="Webex">Webex</MenuItem>
                                             <MenuItem value="GoTo Meeting">GoTo Meeting</MenuItem>
                                         </Select>
                                     </FormControl>
@@ -122,7 +122,7 @@ function AddOneonOneEventPage() {
                                     <Typography variant="subtitle1" fontWeight="bold">Description/Instructions</Typography>
                                     <TextField
                                         name="description"
-                                        placeholder="Write a summary and any details your invitee should know about the event"
+                                        placeholder="Write a summary and any details your invitees should know about the event"
                                         fullWidth
                                         multiline
                                         rows={3}
@@ -163,18 +163,6 @@ function AddOneonOneEventPage() {
                                                 shrink: true,
                                             }}
                                         />
-                                        {/*<TextField*/}
-                                        {/*    label="End Date"*/}
-                                        {/*    type="date"*/}
-                                        {/*    name="endDate"*/}
-                                        {/*    required*/}
-                                        {/*    onChange={handleChange}*/}
-                                        {/*    size="small"*/}
-                                        {/*    variant="outlined"*/}
-                                        {/*    InputLabelProps={{*/}
-                                        {/*        shrink: true,*/}
-                                        {/*    }}*/}
-                                        {/*/>*/}
                                     </Grid>
                                 </Box>
 
@@ -189,17 +177,18 @@ function AddOneonOneEventPage() {
                                             size="small"
                                             variant="outlined"
                                         >
-                                            <MenuItem value="15min">15 min</MenuItem>
                                             <MenuItem value="30min">30 min</MenuItem>
                                             <MenuItem value="45min">45 min</MenuItem>
                                             <MenuItem value="60min">60 min</MenuItem>
+                                            <MenuItem value="90min">90 min</MenuItem>
                                             <MenuItem value="custom">Custom</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Box>
+
                                 <Stack direction="row" spacing={1}>
                                     <Button
-                                        onClick={()=>navigate("/userdashboard")}
+                                        onClick={() => navigate("/userdashboard")}
                                         variant="text"
                                         sx={{
                                             borderRadius: 1,
@@ -214,7 +203,7 @@ function AddOneonOneEventPage() {
                                     </Button>
 
                                     <Button
-                                        type = "submit"
+                                        type="submit"
                                         variant="contained"
                                         color="primary"
                                         sx={{
@@ -305,4 +294,4 @@ function AddOneonOneEventPage() {
     );
 }
 
-export default AddOneonOneEventPage;
+export default AddGroupEventPage;
