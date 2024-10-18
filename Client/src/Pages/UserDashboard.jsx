@@ -26,63 +26,76 @@ function UserDashboard() {
     return (
         <Box textAlign="center" marginTop="20px" position="relative">
             <Typography variant="h4" fontWeight="bold" marginBottom={3}>
-                Welcome, <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>👋 Create your
-                event.
+                Welcome, <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>👋 Create your event.
             </Typography>
             <LogOutButton />
             <Button
                 variant="contained"
                 color="secondary"
                 onClick={() => navigate("/create-event")}
+                sx={{ marginTop: 2, marginBottom: 4 }}
             >
                 Create New Event Type
             </Button>
-            <Box
-                marginTop={4}
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    gap: 2,
-                }}
-            >
-                <Typography>{userEvents.length}</Typography>
-                {userEvents.length > 0 ? (
-                    userEvents.map((event, index) => (
-                        <DemoPaper key={index} elevation={3}>
-                            <Stack direction="row" justifyContent="space-between" alignItems="center" marginBottom={1}>
-                                <IconButton size="small">
-                                    <SettingsIcon />
-                                </IconButton>
-                                <Typography variant="h6" fontWeight="bold">
-                                    {event.name || 'Event Name'}
-                                </Typography>
-                            </Stack>
-                            {/*<Typography variant="h6" fontWeight="bold">*/}
-                            {/*    {event.type || 'Event Type'}*/}
-                            {/*</Typography>*/}
-                            <Typography variant="body2" color="textSecondary">
-                                {event.duration || '30 mins'}, {event.location || 'One-on-One'}
-                            </Typography>
-                            <Typography
-                                variant="body2"
-                                sx={{ color: '#006bff', cursor: 'pointer', textDecoration: 'underline', marginTop: '8px' }}
-                            >
-                                <a
-                                    href={`https://calendly.com/${event.link}`}
-                                    target="_blank"
-                                    style={{ textDecoration: 'none', color: '#006bff' }}
-                                >
-                                    Share link
-                                </a>
-                            </Typography>
-                        </DemoPaper>
-                    ))
-                ) : (
-                    <Typography variant="body1" color="textSecondary">
+
+            <Box marginBottom={4}>
+                <Typography
+                    variant="h5"
+                    color="textPrimary"
+                    sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}
+                >
+                    {userEvents.length} {userEvents.length === 1 ? 'Event' : 'Events'}
+                </Typography>
+                {userEvents.length === 0 && (
+                    <Typography variant="body1" color="textSecondary" sx={{ marginTop: 2 }}>
                         No events created yet.
                     </Typography>
                 )}
+            </Box>
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: 2,
+                }}
+            >
+                {userEvents.length > 0 && userEvents.map((event, index) => (
+                    <DemoPaper key={index} elevation={3}>
+                        <Stack
+                            direction="row"
+                            justifyContent="flex-start"
+                            alignItems="center"
+                            marginBottom={1}
+                            spacing={1}
+                        >
+                            <IconButton size="small" sx={{ marginRight: 1 }}>
+                                <SettingsIcon />
+                            </IconButton>
+                            <Typography variant="h6" fontWeight="bold">
+                                {event.name || 'Event Name'}
+                            </Typography>
+                        </Stack>
+
+                        <Typography variant="body2" color="textSecondary">
+                            {event.duration || '30 mins'}, {event.location || 'One-on-One'}
+                        </Typography>
+                        <Typography
+                            variant="body2"
+                            sx={{ color: '#006bff', cursor: 'pointer', textDecoration: 'underline', marginTop: '8px' }}
+                        >
+                            <a
+                                href={`https://calendly.com/${event.link}`}
+                                target="_blank"
+                                style={{ textDecoration: 'none', color: '#006bff' }}
+                            >
+                                Share link
+                            </a>
+                        </Typography>
+                    </DemoPaper>
+                ))}
             </Box>
         </Box>
     );
