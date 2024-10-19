@@ -21,6 +21,13 @@ const theme = createTheme({
                     height: '59px',
                     marginBottom: '4px',
                 },
+                containedError: {
+                    backgroundColor: '#f44336',
+                    color: 'white',
+                    '&:hover': {
+                        backgroundColor: '#d32f2f',
+                    },
+                },
                 outlined: {
                     fontFamily: 'Montserrat, sans-serif',
                     fontSize: '67px',

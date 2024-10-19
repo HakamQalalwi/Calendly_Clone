@@ -1,21 +1,19 @@
+// AddOneonOneEventPage.jsx
 import {
-    Box,
-    Button,
-    Typography,
-    MenuItem,
-    TextField,
-    Select,
-    FormControl,
-    Stack,
-    Grid,
-    Paper,
+    Box, Button, Typography, MenuItem, TextField, Select,
+    FormControl, Stack, Grid, Paper
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import {useData} from "../context/EventContext.jsx";
+import { useEffect } from "react";
+import { useData } from "../context/EventContext.jsx";
 
 function AddOneonOneEventPage() {
     const navigate = useNavigate();
-    const {eventData, setEventData, createEvent} = useData();
+    const { eventData, setEventData, createEvent, updateEvent, selectedEvent, setSelectedEvent } = useData();
+
+    useEffect(() => {
+        if (selectedEvent) setEventData(selectedEvent);
+    }, [selectedEvent, setEventData]);
 
     const handleChange = (e) => {
         setEventData((prevData) => ({
@@ -26,9 +24,25 @@ function AddOneonOneEventPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createEvent(eventData);
-        navigate("/userdashboard", { state: eventData });
+        if (selectedEvent) {
+            updateEvent(eventData);
+            setSelectedEvent(null);
+        } else {
+            createEvent({ ...eventData, id: Date.now() });
+            setEventData({
+                name: '',
+                type: 'One on One',
+                location: '',
+                description: '',
+                link: '',
+                startDate: '',
+                duration: '',
+            });
+        }
+        navigate("/userdashboard");
     };
+
+
     return (
         <Box
             width="100vw"
@@ -39,268 +53,91 @@ function AddOneonOneEventPage() {
             alignItems="center"
             sx={{ backgroundColor: "#f0f4f8" }}
         >
-            <Box width="90%" padding="1%" marginBottom="2%">
-                <Grid container justifyContent="space-between" alignItems="center">
-                    <Grid item>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{
-                                width: "120px",
-                                borderRadius: 2,
-                                padding: "8px 16px",
-                                fontSize: "0.875rem",
-                                textTransform: "none",
-                                boxShadow: 3,
-                                '&:hover': {
-                                    backgroundColor: '#0a2c4e',
-                                },
-                            }}
-                            onClick={() => navigate("/userdashboard")}
-                        >
-                            Dashboard
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h6" fontWeight="bold">
-                            Add One-on-One Event Type
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Box>
+            <Paper elevation={3} sx={{ padding: 3, borderRadius: 2, width: "80%" }}>
+                <form onSubmit={handleSubmit}>
+                    <Stack spacing={2}>
+                        <TextField
+                            label="Event Name"
+                            name="name"
+                            value={eventData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                        <TextField
+                            label="Event Type"
+                            name="type"
+                            value="One on One"
+                            disabled
+                        />
+                        <FormControl>
+                            <Select
+                                name="location"
+                                value={eventData.location}
+                                onChange={handleChange}
+                                required
+                            >
+                                <MenuItem value="Microsoft Teams">Microsoft Teams</MenuItem>
+                                <MenuItem value="In-person meeting">In-person meeting</MenuItem>
+                                <MenuItem value="Google Meet">Google Meet</MenuItem>
+                                <MenuItem value="Phone call">Phone call</MenuItem>
+                                <MenuItem value="Webex">Webex</MenuItem>
+                                <MenuItem value="Zoom">Zoom</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <TextField
+                            label="Description"
+                            name="description"
+                            value={eventData.description}
+                            onChange={handleChange}
+                            multiline
+                            rows={3}
+                            required
+                        />
+                        <TextField
+                            label="Event Link"
+                            name="link"
+                            value={eventData.link}
+                            onChange={handleChange}
+                            required
+                        />
+                        <TextField
+                            label="Start Date"
+                            type="date"
+                            name="startDate"
+                            value={eventData.startDate}
+                            onChange={handleChange}
+                            InputLabelProps={{ shrink: true }}
+                            required
+                        />
+                        <FormControl>
+                            <Select
+                                name="duration"
+                                value={eventData.duration}
+                                onChange={handleChange}
+                                required
+                            >
+                                <MenuItem value="15min">15 min</MenuItem>
+                                <MenuItem value="30min">30 min</MenuItem>
+                                <MenuItem value="45min">45 min</MenuItem>
+                                <MenuItem value="60min">60 min</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <Stack direction="row" spacing={2}>
+                            <Button
+                                variant="contained"
+                                color="error"
+                                onClick={() => navigate("/userdashboard")}
+                            >
+                                Cancel
+                            </Button>
 
-            <Grid container width="80%" height="100%" spacing={2}>
-                <Grid item xs={4} display="flex" flexDirection="column" height="100%">
-                    <Paper elevation={3} sx={{ padding: 3, borderRadius: 2 }}>
-                        <form onSubmit={handleSubmit}>
-                            <Stack spacing={2}>
-                                <Box>
-                                    <Typography variant="subtitle1" fontWeight="bold">Event Name*</Typography>
-                                    <TextField
-                                        name="name"
-                                        fullWidth
-                                        required
-                                        onChange={handleChange}
-                                        size="small"
-                                        variant="outlined"
-                                    />
-                                </Box>
-                                <Box>
-                                    <Typography variant="subtitle1" fontWeight="bold">Event Type*</Typography>
-                                    <TextField
-                                        name="type"
-                                        value="One on One"
-                                        fullWidth
-                                        size="small"
-                                        variant="outlined"
-                                    />
-                                </Box>
-
-                                <Box>
-                                    <Typography variant="subtitle1" fontWeight="bold">Location</Typography>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            name="location"
-                                            value={eventData.location}
-                                            onChange={handleChange}
-                                            required
-                                            size="small"
-                                            variant="outlined"
-                                        >
-                                            <MenuItem value="Microsoft Teams">Microsoft Teams</MenuItem>
-                                            <MenuItem value="In-person meeting">In-person meeting</MenuItem>
-                                            <MenuItem value="Google Meet">Google Meet</MenuItem>
-                                            <MenuItem value="Phone call">Phone call</MenuItem>
-                                            <MenuItem value="Webex">Webex</MenuItem>
-                                            <MenuItem value="Zoom">Zoom</MenuItem>
-                                            <MenuItem value="GoTo Meeting">GoTo Meeting</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-
-                                <Box>
-                                    <Typography variant="subtitle1" fontWeight="bold">Description/Instructions</Typography>
-                                    <TextField
-                                        name="description"
-                                        placeholder="Write a summary and any details your invitee should know about the event"
-                                        fullWidth
-                                        multiline
-                                        rows={3}
-                                        required
-                                        onChange={handleChange}
-                                        size="small"
-                                        variant="outlined"
-                                    />
-                                </Box>
-
-                                <Box>
-                                    <Typography variant="subtitle1" fontWeight="bold">Event Link*</Typography>
-                                    <Box display="flex" alignItems="center">
-                                        <Typography>calendly.com/</Typography>
-                                        <TextField
-                                            name="link"
-                                            fullWidth
-                                            required
-                                            onChange={handleChange}
-                                            size="small"
-                                            variant="outlined"
-                                        />
-                                    </Box>
-                                </Box>
-
-                                <Box>
-                                    <Typography variant="subtitle1" fontWeight="bold">Date Range</Typography>
-                                    <Grid container gap={1}>
-                                        <TextField
-                                            label="Start Date"
-                                            type="date"
-                                            name="startDate"
-                                            required
-                                            onChange={handleChange}
-                                            size="small"
-                                            variant="outlined"
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                        />
-                                        {/*<TextField*/}
-                                        {/*    label="End Date"*/}
-                                        {/*    type="date"*/}
-                                        {/*    name="endDate"*/}
-                                        {/*    required*/}
-                                        {/*    onChange={handleChange}*/}
-                                        {/*    size="small"*/}
-                                        {/*    variant="outlined"*/}
-                                        {/*    InputLabelProps={{*/}
-                                        {/*        shrink: true,*/}
-                                        {/*    }}*/}
-                                        {/*/>*/}
-                                    </Grid>
-                                </Box>
-
-                                <Box>
-                                    <Typography variant="subtitle1" fontWeight="bold">Duration</Typography>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            name="duration"
-                                            value={eventData.duration}
-                                            onChange={handleChange}
-                                            required
-                                            size="small"
-                                            variant="outlined"
-                                        >
-                                            <MenuItem value="15min">15 min</MenuItem>
-                                            <MenuItem value="30min">30 min</MenuItem>
-                                            <MenuItem value="45min">45 min</MenuItem>
-                                            <MenuItem value="60min">60 min</MenuItem>
-                                            <MenuItem value="custom">Custom</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                                <Stack direction="row" spacing={1}>
-                                    <Button
-                                        onClick={()=>navigate("/userdashboard")}
-                                        variant="text"
-                                        sx={{
-                                            borderRadius: 1,
-                                            fontSize: "0.875rem",
-                                            width: "100px",
-                                            height: "40px",
-                                            fontStyle: "normal",
-                                            marginTop: "4px",
-                                        }}
-                                    >
-                                        Cancel
-                                    </Button>
-
-                                    <Button
-                                        type = "submit"
-                                        variant="contained"
-                                        color="primary"
-                                        sx={{
-                                            borderRadius: 1,
-                                            fontSize: "0.875rem",
-                                            width: "140px",
-                                            height: "40px",
-                                            marginTop: "4px",
-                                        }}
-                                    >
-                                        Next
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </form>
-                    </Paper>
-                </Grid>
-                <Grid item xs={8} display="flex" justifyContent="center" alignItems="center">
-                    <Paper
-                        elevation={3}
-                        sx={{
-                            padding: 3,
-                            borderRadius: 2,
-                            width: "100%",
-                            height: "100%",
-                            overflow: "auto",
-                            backgroundColor: "#ffffff",
-                        }}
-                    >
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            sx={{
-                                borderBottom: "1px solid #e0e0e0",
-                                paddingBottom: "8px",
-                                marginBottom: "16px",
-                                textAlign: "center",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            This is a preview. To book an event.
-                        </Typography>
-
-                        <Typography variant="h5" fontWeight="bold">
-                            {eventData.name || "Event name here"}
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                            {eventData.duration || "Set duration"} min
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                            {eventData.location
-                                ? `Location: ${eventData.location}`
-                                : "Add a location for it to show here"}
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            sx={{
-                                border: "1px solid #e0e0e0",
-                                borderRadius: "8px",
-                                padding: "10px",
-                                minHeight: "80px",
-                                backgroundColor: "#f5f5f5",
-                                whiteSpace: "pre-line",
-                            }}
-                        >
-                            {eventData.description || "Event description here"}
-                        </Typography>
-                        {eventData.link ? (
-                            <Typography variant="h5" fontWeight="bold">
-                                <a
-                                    href={`https://calendly.com/${eventData.link}`}
-                                    target="_blank"
-                                    style={{ textDecoration: 'none', color: '#006bff' }}
-                                >
-                                    {`https://calendly.com/${eventData.link}`}
-                                </a>
-                            </Typography>
-                        ) : (
-                            <Typography variant="h5" fontWeight="bold">
-                                Add a link for your event to show here
-                            </Typography>
-                        )}
-                    </Paper>
-                </Grid>
-            </Grid>
+                            <Button type="submit" variant="contained" color="primary">
+                                {selectedEvent ? "Update" : "Create"}
+                            </Button>
+                        </Stack>
+                    </Stack>
+                </form>
+            </Paper>
         </Box>
     );
 }

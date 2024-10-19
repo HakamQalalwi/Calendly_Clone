@@ -1,9 +1,10 @@
-import {createContext, useContext, useState} from "react";
+// EventContext.jsx
+import { createContext, useContext, useState } from "react";
 
 const EventContext = createContext();
-export const useData = ()=> useContext(EventContext);
+export const useData = () => useContext(EventContext);
 
-export const EventContextProvider= ({children}) =>{
+export const EventContextProvider = ({ children }) => {
     const [eventData, setEventData] = useState({
         name: '',
         type: '',
@@ -13,15 +14,35 @@ export const EventContextProvider= ({children}) =>{
         duration: '',
         startDate: '',
     });
+
     const [userEvents, setUserEvents] = useState([]);
+    const [selectedEvent, setSelectedEvent] = useState(null); // Store the selected event for editing
 
     const createEvent = (newEvent) => {
         setUserEvents((prevData) => [...prevData, newEvent]);
     };
-    return(
-        <EventContext.Provider value={{eventData, setEventData, userEvents, createEvent}}>
+
+    const updateEvent = (updatedEvent) => {
+        setUserEvents((prevData) =>
+            prevData.map((event) =>
+                event.id === updatedEvent.id ? updatedEvent : event
+            )
+        );
+    };
+
+    return (
+        <EventContext.Provider
+            value={{
+                eventData,
+                setEventData,
+                userEvents,
+                createEvent,
+                updateEvent,
+                selectedEvent,
+                setSelectedEvent,
+            }}
+        >
             {children}
         </EventContext.Provider>
-    )
-
-}
+    );
+};
