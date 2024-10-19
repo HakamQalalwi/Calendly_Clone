@@ -7,7 +7,7 @@ import { useUser } from '../context/UserContext';
 
 function SignUpPage() {
     const navigate = useNavigate();
-    const { signUp } = useUser(); // Use signUp from context
+    const { signUp } = useUser();
     const location = useLocation();
 
     const [formData, setFormData] = useState({
@@ -17,7 +17,6 @@ function SignUpPage() {
     });
 
     useEffect(() => {
-        // Set the email from the location state if it exists
         if (location.state?.email) {
             setFormData((prev) => ({
                 ...prev,
