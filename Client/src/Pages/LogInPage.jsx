@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Typography, TextField, Button, Grid, Container, Box } from '@mui/material';
+import { Typography, TextField, Button, Grid, Container, Box, FormControl, FormHelperText } from '@mui/material';
 import NavBar from '../component/NavBar.jsx';
 import Footer from '../component/Footer.jsx';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
 export function LogInPage() {
@@ -29,7 +29,7 @@ export function LogInPage() {
                         <Typography variant="h2" fontWeight="bold">
                             Welcome back
                         </Typography>
-                        <form onSubmit={handleLogin}>
+                        <FormControl fullWidth margin="normal">
                             <TextField
                                 fullWidth
                                 label="Email Address"
@@ -49,20 +49,20 @@ export function LogInPage() {
                             />
                             {error && <Typography variant="body2" sx={{ color: 'red', marginTop: 1 }}>{error}</Typography>}
                             <Button
-                                type="submit"
                                 variant="contained"
                                 color="primary"
                                 sx={{ width: '100%', marginTop: 2 }}
+                                onClick={handleLogin} // Handle login on button click
                             >
                                 Log In
                             </Button>
-                        </form>
-                        <Typography variant="body2" sx={{ marginTop: 2 }}>
-                            Don’t have an account?{" "}
-                            <Link to="/signup" style={{ color: "#486bff" }}>
-                                Sign Up
-                            </Link>
-                        </Typography>
+                            <FormHelperText>
+                                Don’t have an account?{" "}
+                                <Link to="/signup" style={{ color: "#486bff" }}>
+                                    Sign Up
+                                </Link>
+                            </FormHelperText>
+                        </FormControl>
                     </Grid>
                 </Grid>
             </Container>

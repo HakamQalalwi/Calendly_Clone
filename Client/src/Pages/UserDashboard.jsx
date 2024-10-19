@@ -6,6 +6,7 @@ import { useData } from "../context/EventContext.jsx";
 import SettingsIcon from '@mui/icons-material/Settings';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import { useState } from 'react';
 
 const DemoPaper = styled(Paper)(({ theme }) => ({
     width: '300px',
@@ -22,6 +23,18 @@ function UserDashboard() {
     const { user } = useUser();
     const { userEvents } = useData();
     const navigate = useNavigate();
+    const [copyEventLink, setCopyEventLink] = useState(null);
+
+    const handleCopy = (link, eventId) => {
+        navigator.clipboard.writeText(link)
+            .then(() => {
+                setCopyEventLink(eventId);
+                setTimeout(() => setCopyEventLink(null), 100);
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    };
 
     return (
         <Box textAlign="center" marginTop="20px" position="relative">
@@ -85,14 +98,9 @@ function UserDashboard() {
                         <Typography
                             variant="body2"
                             sx={{ color: '#006bff', cursor: 'pointer', textDecoration: 'underline', marginTop: '8px' }}
+                            onClick={() => handleCopy(event.link, event.id)}
                         >
-                            <a
-                                href={`https://calendly.com/${event.link}`}
-                                target="_blank"
-                                style={{ textDecoration: 'none', color: '#006bff' }}
-                            >
-                                Share link
-                            </a>
+                            {copyEventLink === event.id ? 'Copied!' : 'Share Link'}
                         </Typography>
                     </DemoPaper>
                 ))}

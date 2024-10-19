@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Box, Container, Grid, Typography, TextField, Button } from '@mui/material';
+import { Box, Container, Grid, Typography, TextField, Button, FormControl, FormHelperText } from '@mui/material';
 import NavBar from '../component/NavBar.jsx';
 import Footer from '../component/Footer.jsx';
-import {useNavigate, useLocation, Link} from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
 function SignUpPage() {
@@ -45,7 +45,7 @@ function SignUpPage() {
                         <Typography variant="h4" fontWeight="bold" gutterBottom>
                             Sign Up
                         </Typography>
-                        <form onSubmit={handleSubmit}>
+                        <FormControl fullWidth margin="normal">
                             <TextField
                                 fullWidth
                                 label="User Name"
@@ -74,16 +74,20 @@ function SignUpPage() {
                                 required
                                 sx={{ marginBottom: 2 }}
                             />
-                            <Button type="submit" variant="contained" color="primary" sx={{ width: '100%' }}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                sx={{ width: '100%' }}
+                                onClick={handleSubmit}
+                            >
                                 Sign Up
                             </Button>
-                        </form>
-                        <Typography variant="body2" sx={{ marginTop: 2 }}>
-                            You already have account?{" "}
-                            <Link to="/login" style={{ color: "#486bff" }}>
-                                Login
-                            </Link>
-                        </Typography>
+                            <FormHelperText>You already have an account?{" "}
+                                <Link to="/login" style={{ color: "#486bff" }}>
+                                    Login
+                                </Link>
+                            </FormHelperText>
+                        </FormControl>
                     </Grid>
                 </Grid>
             </Container>
