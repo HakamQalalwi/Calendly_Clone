@@ -1,7 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import { useData } from '../context/EventContext.jsx';
-import { Box, Typography, Paper } from '@mui/material';
+import {Box, Typography, Paper, Button} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {useUser} from "../context/UserContext.jsx";
 
@@ -19,6 +19,8 @@ function EventInvitation() {
     const { eventId } = useParams();
     const { userEvents } = useData();
     const { user } = useUser();
+    const navigate = useNavigate();
+
 
     const event = userEvents.find((ev) => ev.id === Number(eventId));
 
@@ -27,39 +29,56 @@ function EventInvitation() {
     }
 
     return (
-        <StyledPaper elevation={3}>
-            <Typography variant="h4" fontWeight="bold" gutterBottom>
-                You're Invited!
-            </Typography>
-            <Typography variant="h6" gutterBottom>
-                <span style={{ fontWeight: "bold" }}>Interviewer Name: </span>{user?.displayName || 'User'}
-            </Typography>
-            <Typography variant="h6" gutterBottom>
-                <span style={{ fontWeight: "bold" }}>Event Name:</span> {event.name}
-            </Typography>
-            <Typography variant="body1" color="textSecondary">
-                <span style={{ fontWeight: "bold" }}>Event Description:</span> {event.description}
-            </Typography>
-            <Typography variant="body1" color="textSecondary" marginTop={2}>
-                <span style={{ fontWeight: "bold" }}>Event Link:</span> {event.link}
-            </Typography>
-            <Typography variant="body1" color="textSecondary" marginTop={2}>
-                <span style={{ fontWeight: "bold" }}>Event Start Date: </span> {event.startDate}
-            </Typography>
-            <Typography variant="body1" color="textSecondary" marginTop={2}>
-                <span style={{ fontWeight: "bold" }}>Time:</span> {event.duration}
-            </Typography>
-            <Typography variant="body1" color="textSecondary" marginTop={2}>
-                <span style={{ fontWeight: "bold" }}>Location:</span> {event.location}
-            </Typography>
-            <Typography
-                variant="body1"
-                sx={{ color: '#006bff', cursor: 'pointer', textDecoration: 'underline', marginTop: '8px' }}
-                onClick={() => window.open(event.link, '_blank')}
+        <>
+            {/* Container for the Dashboard button */}
+            <Box
+                width="100%"           // Full width to ensure it stretches across the page
+                display="flex"         // Flexbox layout
+                justifyContent="flex-start"  // Aligns the button to the left
+                padding="20px"         // Adds padding for some space from the top
             >
-                Join Event
-            </Typography>
-        </StyledPaper>
+                <Button
+                    variant="contained"
+                    onClick={() => navigate("/userdashboard")}
+                >
+                    Dashboard
+                </Button>
+            </Box>
+
+            <StyledPaper elevation={3}>
+                <Typography variant="h4" fontWeight="bold" gutterBottom>
+                    You're Invited!
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                    <span style={{ fontWeight: "bold" }}>Interviewer Name: </span>{user?.displayName || 'User'}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                    <span style={{ fontWeight: "bold" }}>Event Name:</span> {event.name}
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                    <span style={{ fontWeight: "bold" }}>Event Description:</span> {event.description}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" marginTop={2}>
+                    <span style={{ fontWeight: "bold" }}>Event Link:</span> {event.link}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" marginTop={2}>
+                    <span style={{ fontWeight: "bold" }}>Event Start Date: </span> {event.startDate}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" marginTop={2}>
+                    <span style={{ fontWeight: "bold" }}>Event Duration:</span> {event.duration}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" marginTop={2}>
+                    <span style={{ fontWeight: "bold" }}>Event Location:</span> {event.location}
+                </Typography>
+                <Typography
+                    variant="body1"
+                    sx={{ color: '#006bff', cursor: 'pointer', textDecoration: 'underline', marginTop: '8px' }}
+                    onClick={() => window.open(event.link, '_blank')}
+                >
+                    Join Event
+                </Typography>
+            </StyledPaper>
+        </>
     );
 }
 
