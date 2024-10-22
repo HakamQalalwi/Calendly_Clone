@@ -11,7 +11,19 @@ function AddGroupEventPage() {
     const { eventData, setEventData, createEvent, updateEvent, selectedEvent, setSelectedEvent } = useData();
 
     useEffect(() => {
-        if (selectedEvent) setEventData(selectedEvent);
+        if (selectedEvent){
+            setEventData(selectedEvent)
+        }else {
+            setEventData({
+                name: '',
+                type: 'Group',
+                location: '',
+                description: '',
+                link: '',
+                startDate: '',
+                duration: '',
+            })
+        }
     }, [selectedEvent, setEventData]);
 
     const handleChange = (e) => {

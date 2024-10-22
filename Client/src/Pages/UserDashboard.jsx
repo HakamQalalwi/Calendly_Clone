@@ -9,6 +9,7 @@ import { styled } from '@mui/material/styles';
 import { useUser } from "../context/UserContext.jsx";
 import { useState } from "react";
 import {DeleteForeverOutlined} from "@mui/icons-material";
+import LogOutButton from "../component/LogOutButton.jsx";
 
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -66,6 +67,7 @@ function UserDashboard() {
 
     return (
         <Box textAlign="center" marginTop="20px">
+            <LogOutButton/>
             <Typography variant="h4" fontWeight="bold" marginBottom={3}>
                 Hi <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>
             </Typography>
