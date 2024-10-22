@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { styled } from '@mui/material/styles';
 import { useUser } from "../context/UserContext.jsx";
 import { useState } from "react";
+import {DeleteForeverOutlined} from "@mui/icons-material";
 
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -33,7 +34,7 @@ const EventDetails = styled(Typography)(() => ({
 }));
 
 function UserDashboard() {
-    const { userEvents, setSelectedEvent } = useData();
+    const { userEvents, setSelectedEvent, deleteEvent } = useData();
     const navigate = useNavigate();
     const [copyEventLink, setCopyEventLink] = useState(null);
     const { user } = useUser();
@@ -42,6 +43,10 @@ function UserDashboard() {
         setSelectedEvent(event);
         navigate("/add-one-on-one");
     };
+
+    const handleDelete = (event) =>{
+        deleteEvent(event);
+    }
 
     const handleCopy = (link, eventId) => {
         navigator.clipboard.writeText(link)
@@ -85,8 +90,7 @@ function UserDashboard() {
                     {userEvents.map((event) => (
                         <Grid item xs={12} sm={6} md={4} key={event.id}>
                             <StyledPaper elevation={3}>
-                                <Stack direction="row" justifyContent="space-between" alignItems="center">
-                                    <EventName>Event Name: {event.name}</EventName>
+                                <Stack direction="row" justifyContent="flex-end">
                                     <IconButton
                                         onClick={() => handleEdit(event)}
                                         size="small"
@@ -94,7 +98,15 @@ function UserDashboard() {
                                     >
                                         <EditIcon />
                                     </IconButton>
+                                    <IconButton
+                                        onClick={() => handleDelete(event)}
+                                        size="small"
+                                        sx={{ color: '#006bff' }}
+                                    >
+                                        <DeleteForeverOutlined />
+                                    </IconButton>
                                 </Stack>
+                                <EventName>Event Name: {event.name}</EventName>
                                 <EventDetails sx={{ marginTop: 1 }}>
                                     <span style={{ fontWeight: "bold" }}>Event Link:</span> {event.link}
                                 </EventDetails>

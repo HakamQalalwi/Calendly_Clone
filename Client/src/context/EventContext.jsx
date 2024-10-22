@@ -30,6 +30,12 @@ export const EventContextProvider = ({ children }) => {
         );
     };
 
+    const deleteEvent = (deletedEvent) => {
+        setUserEvents((prevData) =>
+            prevData.filter((event) => event.id !== deletedEvent.id
+            )
+        );
+    };
     return (
         <EventContext.Provider
             value={{
@@ -38,6 +44,7 @@ export const EventContextProvider = ({ children }) => {
                 userEvents,
                 createEvent,
                 updateEvent,
+                deleteEvent,
                 selectedEvent,
                 setSelectedEvent,
             }}
