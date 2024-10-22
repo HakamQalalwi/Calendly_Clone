@@ -1,5 +1,5 @@
 import {
-    Box, Button, Typography, MenuItem, TextField, Select,
+    Box, Button, MenuItem, TextField, Select,
     FormControl, Stack, Paper
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,8 @@ function AddGroupEventPage() {
                 link: '',
                 startDate: '',
                 duration: '',
-            })
+                availableSpots: 2
+        })
         }
     }, [selectedEvent, setEventData]);
 
@@ -35,11 +36,15 @@ function AddGroupEventPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (eventData.availableSpots < 2) {
+            alert("The minimum number of spots is 2.");
+            return;
+        }
         if (selectedEvent) {
             updateEvent(eventData);
             setSelectedEvent(null);
         } else {
-            createEvent({ ...eventData, id: Date.now() });
+            createEvent({ ...eventData, id: Date.now(), availableSpots: 2  });
             setEventData({
                 name: '',
                 type: 'Group',
@@ -48,6 +53,7 @@ function AddGroupEventPage() {
                 link: '',
                 startDate: '',
                 duration: '',
+                availableSpots: 2
             });
         }
         navigate("/userdashboard");
@@ -62,8 +68,16 @@ function AddGroupEventPage() {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            sx={{ backgroundColor: "#f0f4f8" }}
+            sx={{ backgroundColor: "#f0f4f8", position: "relative" }}
+
         >
+            <Button
+                variant="contained"
+                sx={{ position: "absolute", top: "20px", left: "20px" }}
+                onClick={() => navigate("/userdashboard")}
+            >
+                Dashboard
+            </Button>
             <Paper elevation={3} sx={{ padding: 3, borderRadius: 2, width: "80%" }}>
                 <form onSubmit={handleSubmit}>
                     <Stack spacing={2}>
@@ -134,6 +148,14 @@ function AddGroupEventPage() {
                                 <MenuItem value="custom">Custom</MenuItem>
                             </Select>
                         </FormControl>
+                        <TextField
+                            label="Available Spots"
+                            name="availableSpots"
+                            type="number"
+                            value={eventData.availableSpots}
+                            onChange={handleChange}
+                            required
+                        />
                         <Stack direction="row" spacing={2}>
                             <Button variant="contained" color="error" onClick={() => navigate("/userdashboard")}>
                                 Cancel

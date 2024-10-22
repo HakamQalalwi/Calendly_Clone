@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Paper, styled } from '@mui/material';
+import {Box, Grid, Typography, Paper, styled, Button} from '@mui/material';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import LogOutButton from "../component/LogOutButton.jsx";
@@ -77,6 +77,13 @@ export function CreateEventPage() {
 
     return (
         <Box textAlign="center" marginTop="20px" position="relative">
+            <Button
+                variant="contained"
+                sx={{ position: "absolute", top: "20px", left: "20px" }}
+                onClick={() => navigate("/userdashboard")}
+            >
+                Dashboard
+            </Button>
             <Typography variant="h4" fontWeight="bold" marginBottom={3}>
                 Welcome, <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>👋 Choose your
                 event type to procced.

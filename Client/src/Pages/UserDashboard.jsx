@@ -10,12 +10,14 @@ import { useUser } from "../context/UserContext.jsx";
 import { useState } from "react";
 import {DeleteForeverOutlined} from "@mui/icons-material";
 import LogOutButton from "../component/LogOutButton.jsx";
+import EventIcon from '@mui/icons-material/Event';
 
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
     borderRadius: 8,
     borderTop: '4px solid #006bff',
+    width: '450px',
     transition: 'transform 0.3s, box-shadow 0.3s',
     '&:hover': {
         transform: 'scale(1.05)',
@@ -64,15 +66,11 @@ function UserDashboard() {
         navigate(`/userdashboard/${eventId}`);
     };
 
-
     return (
         <Box textAlign="center" marginTop="20px">
             <LogOutButton/>
             <Typography variant="h4" fontWeight="bold" marginBottom={3}>
-                Hi <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>
-            </Typography>
-            <Typography variant="h4" fontWeight="bold" marginBottom={3}>
-                Your Events
+                Hi 👋 <span style={{ color: "#006bff" }}>{user?.displayName || 'User'}</span>
             </Typography>
             <Button
                 variant="contained"
@@ -84,13 +82,20 @@ function UserDashboard() {
             </Button>
 
             {userEvents.length === 0 ? (
-                <Typography variant="body1" color="textSecondary">
-                    No events created yet.
-                </Typography>
+                <Box textAlign="center" mt={4}>
+                    <EventIcon style={{ fontSize: 50, color: '#006bff' }} />
+                    <Typography variant="h5" fontWeight="bold" mt={2}>
+                        Simplify your scheduling with event types
+                    </Typography>
+                    <Typography variant="body1" color="textSecondary" mt={1}>
+                        Create event types for meetings you'll want to schedule regularly, like product
+                        demos, customer calls, office hours, and more.
+                    </Typography>
+                </Box>
             ) : (
                 <Grid container spacing={2} justifyContent="center">
                     {userEvents.map((event) => (
-                        <Grid item xs={12} sm={6} md={4} key={event.id}>
+                        <Grid item key={event.id}>
                             <StyledPaper elevation={3}>
                                 <Stack direction="row" justifyContent="flex-end">
                                     <IconButton
@@ -135,7 +140,13 @@ function UserDashboard() {
                                 </Box>
 
                                 <EventDetails sx={{ marginTop: 1 }}>
-                                    <span style={{ fontWeight: "bold" }}>Event Duration & Location:</span> {event.duration}, {event.location}
+                                    <span style={{ fontWeight: "bold" }}>Event Type:</span> {event.type}
+                                </EventDetails>
+                                <EventDetails sx={{ marginTop: 1 }}>
+                                    <span style={{ fontWeight: "bold" }}>Event Duration:</span> {event.duration}
+                                </EventDetails>
+                                <EventDetails sx={{ marginTop: 1 }}>
+                                    <span style={{ fontWeight: "bold" }}>Location:</span> {event.location}
                                 </EventDetails>
                                 <EventDetails sx={{ marginTop: 1 }}>
                                     <span style={{ fontWeight: "bold" }}>Event Start Date: </span> {event.startDate}

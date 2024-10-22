@@ -1,4 +1,3 @@
-import React from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import { useData } from '../context/EventContext.jsx';
 import {Box, Typography, Paper, Button} from '@mui/material';
@@ -30,12 +29,11 @@ function EventInvitation() {
 
     return (
         <>
-            {/* Container for the Dashboard button */}
             <Box
-                width="100%"           // Full width to ensure it stretches across the page
-                display="flex"         // Flexbox layout
-                justifyContent="flex-start"  // Aligns the button to the left
-                padding="20px"         // Adds padding for some space from the top
+                width="100%"
+                display="flex"
+                justifyContent="flex-start"
+                padding="20px"
             >
                 <Button
                     variant="contained"

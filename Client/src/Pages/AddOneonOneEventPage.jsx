@@ -28,7 +28,7 @@ function AddOneonOneEventPage() {
             updateEvent(eventData);
             setSelectedEvent(null);
         } else {
-            createEvent({ ...eventData, id: Date.now() });
+            createEvent({ ...eventData, id: Date.now(), availableSpots: undefined });
             setEventData({
                 name: '',
                 type: 'One on One',
@@ -51,8 +51,16 @@ function AddOneonOneEventPage() {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            sx={{ backgroundColor: "#f0f4f8" }}
+            sx={{ backgroundColor: "#f0f4f8", position: "relative" }}
+
         >
+            <Button
+                variant="contained"
+                sx={{ position: "absolute", top: "20px", left: "20px" }}
+                onClick={() => navigate("/userdashboard")}
+            >
+                Dashboard
+            </Button>
             <Paper elevation={3} sx={{ padding: 3, borderRadius: 2, width: "80%" }}>
                 <form onSubmit={handleSubmit}>
                     <Stack spacing={2}>

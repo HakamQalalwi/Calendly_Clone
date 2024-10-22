@@ -13,6 +13,7 @@ export const EventContextProvider = ({ children }) => {
         link: '',
         duration: '',
         startDate: '',
+        availableSpots: 2
     });
 
     const [userEvents, setUserEvents] = useState([]);
