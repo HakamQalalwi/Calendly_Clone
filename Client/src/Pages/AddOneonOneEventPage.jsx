@@ -23,7 +23,7 @@ function AddOneonOneEventPage() {
                 link: '',
                 startDate: '',
                 duration: '',
-                availableSpots: 2
+                availableSpots: ''
             })
         }
     }, [selectedEvent, setEventData]);
