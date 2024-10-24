@@ -12,9 +12,21 @@ function AddOneonOneEventPage() {
     const { eventData, setEventData, createEvent, updateEvent, selectedEvent, setSelectedEvent } = useData();
 
     useEffect(() => {
-        if (selectedEvent) setEventData(selectedEvent);
+        if (selectedEvent){
+            setEventData(selectedEvent)
+        }else {
+            setEventData({
+                name: '',
+                type: 'One on One',
+                location: '',
+                description: '',
+                link: '',
+                startDate: '',
+                duration: '',
+                availableSpots: 2
+            })
+        }
     }, [selectedEvent, setEventData]);
-
     const handleChange = (e) => {
         setEventData((prevData) => ({
             ...prevData,
